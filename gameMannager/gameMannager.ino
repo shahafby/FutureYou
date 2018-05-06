@@ -26,7 +26,7 @@ Questions asafQuestions[];
 Questions oriQuestions[];
 
 //Array of all magnetic sensors in the board
-int magneticSensors;
+//int magneticSensors;
 
 //Thresholds for the magnetic sensor in order to detect players
 player1Threshold;
@@ -42,7 +42,8 @@ void loop()
     switch (state)
     {
     case STATE_START:
-        state = handleStateStart();
+//        state = handleStateStart();
+        state = new StartState().start();
         break;
     case STATE_LOCATION:
         state = handleStateLocation();
@@ -70,6 +71,7 @@ void initGame(){
     player2 = new Player();
 
     allSquares = initAllSquares();
+    alumni = initAlumniRecords();
 }
 
 int handleStateStart(){
@@ -83,7 +85,7 @@ Player switchPlayer(Player p){
 }
 
 int handleStateLocation(){
-    while(currentPlayer.currentSquare != (currentSquare = getPlayerSqaure(currentPlayer)){
+    while(currentPlayer.currentSquare == (currentSquare = getPlayerSqaure(currentPlayer)){
         delay(10);
     }
     return STATE_QUESTION;
@@ -92,28 +94,25 @@ int handleStateLocation(){
 //reutrn the player currentSqaure
 Square getPlayerSqaure(Player p){
     int sensorValue;
-    for( int i = 0; i < magneticSensors.size() ; i++){
-        sensorValue = analogRead(magneticSensors[i]);
-        if(p.playerID == 1 && sensorValue > player1Threshold) return sensorToSquare(sensorValue);
-        if(p.playerID == 2 && sensorValue < player2Threshold) return sensorToSquare(sensorValue);
+    for( int i = 0; i < allSquares.size() ; i++){
+        sensorValue = analogRead(allSquares[i].pinID)
+        if(p.playerID == 1 && sensorValue > player1Threshold) return allSquares[i];
+        if(p.playerID == 2 && sensorValue < player2Threshold) return allSquares[i];
     }
 }
 
-//return the sqaure the this sensor value is on
-Square sensorToSquare(int sensorValue){
-    //TO:DO
-return new Square();
-
-}
 
 AlumniRecords[] initAlumniRecords(){
+  AlumniRecords arr[];
   alumniQuestions();
-  alumni[0] = New AlumniRecords('keren',kerenQuestions);
-  alumni[1] = New AlumniRecords('ran',ranQuestions);
-  alumni[2] = New AlumniRecords('yahav',yahavQuestions);
-  alumni[3] = New AlumniRecords('daniel',danielQuestions);
-  alumni[4] = New AlumniRecords('asaf',asafQuestions);
-  alumni[5] = New AlumniRecords('ori',oriQuestions);
+  arr[0] = New AlumniRecords('keren',kerenQuestions);
+  arr[1] = New AlumniRecords('ran',ranQuestions);
+  arr[2] = New AlumniRecords('yahav',yahavQuestions);
+  arr[3] = New AlumniRecords('daniel',danielQuestions);
+  arr[4] = New AlumniRecords('asaf',asafQuestions);
+  arr[5] = New AlumniRecords('ori',oriQuestions);
+
+  return arr;
 }
 
 Square[] initAllSquares(){
