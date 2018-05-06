@@ -60,10 +60,9 @@ void initGame(){
 }
 int handleStateStart(){
     currentPlayer = switchPlayer(currentPlayer);
-    
 }
 
 //switches all the current player data
 Player switchPlayer(Player p){
-
+    return (p == player2 ? player1 : player2);
 }
