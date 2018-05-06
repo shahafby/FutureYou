@@ -56,18 +56,55 @@ void loop()
 void initGame(){
     player1 = new Player();
     player2 = new Player();
+<<<<<<< HEAD
     allSquares = initAllSquares();
     
+=======
+    Square allSquares[];
+    Player currentPlayer;
+    Square currentSquare;
+    
+    //Array of all magnetic sensors in the board
+    int magneticSensors;
+    //Thresholds for the magnetic sensor in order to detect players
+    player1Threshold;
+    player2Threshold;
+>>>>>>> 34f0e7643a434d440d5e2574abc39ac17bc38731
 
 }
 int handleStateStart(){
     currentPlayer = switchPlayer(currentPlayer);
-    
+    return STATE_LOCATION;
 }
 
 //switches all the current player data
 Player switchPlayer(Player p){
+    return (p == player2 ? player1 : player2);
+}
 
+int handleStateLocation(){
+    while(currentPlayer.currentSquare != (currentSquare = getPlayerSqaure(currentPlayer)){
+        delay(10);
+    }
+    return STATE_QUESTION;
+}
+
+//reutrn the player currentSqaure
+Square getPlayerSqaure(Player p){
+    int sensorValue;
+    for( int i = 0; i < magneticSensors.size() ; i++){
+        sensorValue = analogRead(magneticSensors[i]);
+        if(p.playerID == 1 && sensorValue > player1Threshold) return sensorToSquare(sensorValue);
+        if(p.playerID == 2 && sensorValue < player2Threshold) return sensorToSquare(sensorValue);
+    }
+}
+
+//return the sqaure the this sensor value is on
+Square sensorToSquare(int sensorValue){
+    
+    //TO:DO
+
+<<<<<<< HEAD
 }
 
 Square[] initAllSquares(){
@@ -86,3 +123,7 @@ AlumniRecords[] initAlumniRecords(){
 }
 
 
+=======
+    return new Square();
+}
+>>>>>>> 34f0e7643a434d440d5e2574abc39ac17bc38731

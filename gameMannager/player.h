@@ -4,6 +4,7 @@
 class Player
 {
   public:
+    //1 = player1 ; 2 = player 2
     int playerID;
     Square currentSquare;
     Square capturedSquared[];
