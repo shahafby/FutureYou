@@ -52,13 +52,18 @@ void loop()
 
 void initGame(){
     player1 = new Player();
-    player1;
-    Player player2;
+    player2 = new Player();
     Square allSquares[];
     Player currentPlayer;
     Square currentSquare;
 
 }
-int handleStateStart()
-{
+int handleStateStart(){
+    currentPlayer = switchPlayer(currentPlayer);
+    
+}
+
+//switches all the current player data
+Player switchPlayer(Player p){
+
 }
