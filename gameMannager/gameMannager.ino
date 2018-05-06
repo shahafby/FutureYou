@@ -10,11 +10,14 @@
 #define STATE_CORRECT 60
 #define STATE_CHECKWIN 70
 
+#define NUM_SQUARES 26
+
 Player player1;
 Player player2;
 Square allSquares[];
 Player currentPlayer;
 Square currentSquare;
+AlumniRecords alumniRec[];
 
 
 void setup()
@@ -53,9 +56,8 @@ void loop()
 void initGame(){
     player1 = new Player();
     player2 = new Player();
-    Square allSquares[];
-    Player currentPlayer;
-    Square currentSquare;
+    allSquares = initAllSquares();
+    
 
 }
 int handleStateStart(){
@@ -67,3 +69,20 @@ int handleStateStart(){
 Player switchPlayer(Player p){
 
 }
+
+Square[] initAllSquares(){
+  Square squares[NUM_SQUARES] 
+  for(int i = 0; i < NUM_SQUARES; i++){
+    squares[i] = new Square(,) // todo.....
+  }
+}
+
+AlumniRecords[] initAlumniRecords(){
+  AlumniRecords alumniRec[6] = 
+  {
+    New  
+    }
+  
+}
+
+

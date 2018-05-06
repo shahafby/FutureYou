@@ -8,4 +8,10 @@ class Square
     bool taken;
     string owendBy;
     Question[] questions;
+
+    Square(Question[] questionsForSquares, int pin){
+      taken = false;
+      questions = questionsForSquares;
+      pinID = pin;
+    }
 };
