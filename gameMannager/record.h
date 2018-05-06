@@ -1,17 +1,17 @@
 #include <string>
 
-//class AlumniRecords
-//{
-//    public:
-//    Question questions[3];
-//    string name;
-//
-//    AlumniRecords(string alumniName, Question question){
-//      name = alumniName;
-//      questions[i] = new Question (name,
-//     }
-//    }
-//};
+class AlumniRecords
+{
+    public:
+    Question questions[3];
+    string name;
+
+    AlumniRecords(string alumniName, Question question){
+      name = alumniName;
+      questions[i] = new Question (name,
+     }
+    }
+};
 
 
 class Record

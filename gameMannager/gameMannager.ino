@@ -17,8 +17,19 @@ Player player2;
 Square allSquares[];
 Player currentPlayer;
 Square currentSquare;
-AlumniRecords alumniRec[];
+Questions kerenQuestions[];
+Questions ranQuestions[];
+Questions yahavQuestions[];
+Questions DanielQuestions[];
+Questions asafQuestions[];
+Questions oriQuestions[];
 
+//Array of all magnetic sensors in the board
+int magneticSensors;
+
+//Thresholds for the magnetic sensor in order to detect players
+player1Threshold;
+player2Threshold;
 
 void setup()
 {
@@ -56,22 +67,10 @@ void loop()
 void initGame(){
     player1 = new Player();
     player2 = new Player();
-<<<<<<< HEAD
-    allSquares = initAllSquares();
-    
-=======
-    Square allSquares[];
-    Player currentPlayer;
-    Square currentSquare;
-    
-    //Array of all magnetic sensors in the board
-    int magneticSensors;
-    //Thresholds for the magnetic sensor in order to detect players
-    player1Threshold;
-    player2Threshold;
->>>>>>> 34f0e7643a434d440d5e2574abc39ac17bc38731
 
+    allSquares = initAllSquares();
 }
+
 int handleStateStart(){
     currentPlayer = switchPlayer(currentPlayer);
     return STATE_LOCATION;
@@ -101,17 +100,9 @@ Square getPlayerSqaure(Player p){
 
 //return the sqaure the this sensor value is on
 Square sensorToSquare(int sensorValue){
-    
     //TO:DO
+return new Square();
 
-<<<<<<< HEAD
-}
-
-Square[] initAllSquares(){
-  Square squares[NUM_SQUARES] 
-  for(int i = 0; i < NUM_SQUARES; i++){
-    squares[i] = new Square(,) // todo.....
-  }
 }
 
 AlumniRecords[] initAlumniRecords(){
@@ -122,8 +113,33 @@ AlumniRecords[] initAlumniRecords(){
   
 }
 
-
-=======
-    return new Square();
+Square[] initAllSquares(){
+  Square squares = {
+    New Square()
+  
+  }
 }
->>>>>>> 34f0e7643a434d440d5e2574abc39ac17bc38731
+
+void init alumniQuestions(){
+  for (int i = 0; i < 9; i ++){
+    kerenQuestions[i / 3] =  New Question('keren', New Record(1,i + 1), New Record(1,i + 1), New Record(1,i + 1)),
+  }
+  for (int i = 0; i < 9; i ++){
+    ranQuestions[i / 3] =  New Question('ran', New Record(1,i + 1), New Record(1,i + 1), New Record(1,i + 1)),
+  }
+  for (int i = 0; i < 9; i ++){
+    yahavQuestions[i / 3] =  New Question('yahav', New Record(1,i + 1), New Record(1,i + 1), New Record(1,i + 1)),
+  }
+  for (int i = 0; i < 9; i ++){
+    danielQuestions[i / 3] =  New Question('daniel', New Record(1,i + 1), New Record(1,i + 1), New Record(1,i + 1)),
+  }
+  for (int i = 0; i < 9; i ++){
+    asafQuestions[i / 3] =  New Question('asaf', New Record(1,i + 1), New Record(1,i + 1), New Record(1,i + 1)),
+  }
+  for (int i = 0; i < 9; i ++){
+    oriQuestions[i / 3] =  New Question('ori', New Record(1,i + 1), New Record(1,i + 1), New Record(1,i + 1)),
+  }
+
+  
+}
+
