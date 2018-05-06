@@ -17,6 +17,7 @@ Player player2;
 Square allSquares[];
 Player currentPlayer;
 Square currentSquare;
+AlumniRecords alumni[];
 Questions kerenQuestions[];
 Questions ranQuestions[];
 Questions yahavQuestions[];
@@ -106,11 +107,13 @@ return new Square();
 }
 
 AlumniRecords[] initAlumniRecords(){
-  AlumniRecords alumniRec[6] = 
-  {
-    New  
-    }
-  
+  alumniQuestions();
+  alumni[0] = New AlumniRecords('keren',kerenQuestions);
+  alumni[1] = New AlumniRecords('ran',ranQuestions);
+  alumni[2] = New AlumniRecords('yahav',yahavQuestions);
+  alumni[3] = New AlumniRecords('daniel',danielQuestions);
+  alumni[4] = New AlumniRecords('asaf',asafQuestions);
+  alumni[5] = New AlumniRecords('ori',oriQuestions);
 }
 
 Square[] initAllSquares(){
@@ -139,7 +142,5 @@ void init alumniQuestions(){
   for (int i = 0; i < 9; i ++){
     oriQuestions[i / 3] =  New Question('ori', New Record(1,i + 1), New Record(1,i + 1), New Record(1,i + 1)),
   }
-
-  
 }
 
