@@ -23,8 +23,9 @@ class Question
     Record correctQuestionRecord;
     Record wrongQuestionRecord;
     boolean asked;
+     // 0 = wasn't answered ; 1 = player 1 ; 2 = player 2
+    int anwerdBy;
     String alumni;
-    int correctQuestionAnswerNumber;
 
     Question(String newAlumni, Record newQuestion, Record newCorrectAnswer, newWrongAnswer, boolean newAsked,int newCorrectQuestionAnswerNumber)
     {
@@ -33,7 +34,6 @@ class Question
         wrongQuestionRecord = newWrongQuestion;
         asked = false;
         alumni = newAlumni;
-        correctQuestionAnswerNumber = newCorrectQuestionAnswerNumber;
     }
 };
 

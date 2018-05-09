@@ -11,6 +11,8 @@
 // no need ! #define STATE_WRONG 50
 #define STATE_CORRECT 60
 #define STATE_CHECKWIN 70
+#define STATE_ENDGAME 80
+#define STATE_NEWGAME 90
 
 #define NUM_SQUARES 26
 
@@ -68,6 +70,14 @@ void loop()
 
     case STATE_CHECKWIN:
         state = handleStateCheckhWin();
+        break;
+    }
+    case STATE_ENDGAME:
+        state = handleStateEndGame();
+        break;
+    }
+    case STATE_NEWGAME:
+        state = handleStateNewGame();
         break;
     }
 }
@@ -136,6 +146,7 @@ int handleStateInput(){
     while(!answerNumber) answerNumber = checkResponse;
 
     if(answerNumber == cuurentQuestion.correctQuestionAnswerNumber){
+
         serialmp3_play(cuurentQuestion.correctQuestionRecord.folder,cuurentQuestion.correctQuestionRecord.file);
         return STATE_CORRECT;
     }
@@ -157,8 +168,30 @@ int checkResponse()
 int handleStateCorrect(){
     currentSqaure.taken = currentPlayer.id;
     currentPlayer.numberOfCapturedSquared++;
+    currentQuestion = currentPlayer.id;
     return STATE_CHECKWIN;
 }
+
+int handleStateCheckhWin {
+    if(currentPlayer.numberOfCapturedSquared >= 5) return STATE_ENDGAME;
+    if(checkAllAlumniSqaures()) return STATE_ENDGAME;
+
+    return STATE_START;
+}
+
+boolean checkAllAlumniSqaures(){
+    AlumniRecords alumniRecords = getAlumniRecords();
+    return (alumniRecords.questions[0].anwerdBy).compare(alumniRecords.questions[1].anwerdBy) &&
+    (alumniRecords.questions[1].anwerdBy).compare(alumniRecords.questions[2].anwerdBy);
+}
+
+AlumniRecords getAlumniRecords(){
+    string alumniName = currentSqaure.owendBy;
+    for(int i=0; i<alumni.length; i++){
+        if(alumni[i].name == alumniName) return alumni[i];
+    }
+}
+
 
 
 
