@@ -1,5 +1,6 @@
-#include "alumniRecord.h"
-#include "square.h"
+#include "FutureYou/gameMannager/question.h"
+#include "FutureYou/gameMannager/square.h"
+#include "FutureYou/gameMannager/record.h"
 
 class Player
 {
@@ -7,12 +8,12 @@ class Player
     //1 = player1 ; 2 = player 2
     int playerID;
     Square currentSquare;
-    Square capturedSquared[];
+    int numberOfCapturedSquared;
 
     Player(Square initSquare, int ID)
     {
         playerID = ID;
         currentSquare = initSquare;
-        capturedSquared = new Square[10];
+        capturedSquared = 0;
     }
 };

@@ -19,19 +19,21 @@ class AlumniRecords
 class Question
 {
   public:
-    Record question;
-    Record correctQuestion;
-    Record wrongQuestion;
+    Record questionReocrd;
+    Record correctQuestionRecord;
+    Record wrongQuestionRecord;
     boolean asked;
     String alumni;
+    int correctQuestionAnswerNumber;
 
-    Question(String newAlumni, Record newQuestion, Record newCorrectAnswer, newWrongAnswer, boolean newAsked)
+    Question(String newAlumni, Record newQuestion, Record newCorrectAnswer, newWrongAnswer, boolean newAsked,int newCorrectQuestionAnswerNumber)
     {
-        question = newQuestion;
-        correctQuestion = newCorrectQuestion;
-        wrongQuestion = newWrongQuestion;
+        questionReocrd = newQuestion;
+        correctQuestionRecord = newCorrectQuestion;
+        wrongQuestionRecord = newWrongQuestion;
         asked = false;
         alumni = newAlumni;
+        correctQuestionAnswerNumber = newCorrectQuestionAnswerNumber;
     }
 };
 

@@ -8,7 +8,7 @@
 #define STATE_LOCATION 20
 #define STATE_QUESTION 30
 #define STATE_INPUT 40
-#define STATE_WRONG 50
+// no need ! #define STATE_WRONG 50
 #define STATE_CORRECT 60
 #define STATE_CHECKWIN 70
 
@@ -57,12 +57,15 @@ void loop()
     case STATE_INPUT:
         state = handleStateInput();
         break;
+/* no need!
     case STATE_WRONG:
         state = handleStateWrong();
         break;
+*/
     case STATE_CORRECT:
         state = handleStateCorrect();
         break;
+
     case STATE_CHECKWIN:
         state = handleStateCheckhWin();
         break;
@@ -114,13 +117,14 @@ int handleStateQuestion(){
     if(!cuurentQuestion) return STATE_CHECKWIN;
 
     serialmp3_play(cuurentQuestion.questionRecord.folder,cuurentQuestion.questionRecord.file);
+    currentQuestion.asked = True;
     return STATE_INPUT;
 
 }
 
 Question getCurrentQuestion(){
     for(int i=0;i<3;i++){
-        if(!currentSqaure.questions[i].taken) return currentSqaure.questions[i];
+        if(!currentSqaure.questions[i].asked) return currentSqaure.questions[i];
     }
     return null;
 }
@@ -131,7 +135,14 @@ int handleStateInput(){
     
     while(!answerNumber) answerNumber = checkResponse;
 
-    if(answerNumber == curren)
+    if(answerNumber == cuurentQuestion.correctQuestionAnswerNumber){
+        serialmp3_play(cuurentQuestion.correctQuestionRecord.folder,cuurentQuestion.correctQuestionRecord.file);
+        return STATE_CORRECT;
+    }
+    else{
+        serialmp3_play(cuurentQuestion.wrongQuestionRecord.folder,cuurentQuestion.wrongQuestionRecord.file);
+        return STATE_START;
+    }
 }
 
 int checkResponse()
@@ -143,7 +154,11 @@ int checkResponse()
     return null;
 }
 
-
+int handleStateCorrect(){
+    currentSqaure.taken = currentPlayer.id;
+    currentPlayer.numberOfCapturedSquared++;
+    return STATE_CHECKWIN;
+}
 
 
 
@@ -166,13 +181,14 @@ Square[] initAllSquares(){
 }
 
 void init alumniQuestions(){
+    //TODO insert all the correct answers
   for (int i = 0; i < 3; i ++){
-    kerenQuestions[i] =  New Question('keren', New Record(1,3*i + 1), New Record(1,3*i + 2), New Record(1,3*i + 3)),
-    ranQuestions[i] =  New Question('ran', New Record(2,3*i + 1), New Record(2,3*i + 2), New Record(2,3*i + 3)),
-    yahavQuestions[i] =  New Question('yahav', , New Record(3,3*i + 1), New Record(3,3*i + 2), New Record(3,3*i + 3)),
-    danielQuestions[i] =  New Question('daniel', , New Record(4,3*i + 1), New Record(4,3*i + 2), New Record(4,3*i + 3)),
-    asafQuestions[i] =  New Question('asaf', , New Record(5,3*i + 1), New Record(5,3*i + 2), New Record(5,3*i + 3)),
-    oriQuestions[i] =  New Question('ori', , New Record(6,3*i + 1), New Record(6,3*i + 2), New Record(6,3*i + 3)),
+    kerenQuestions[i] =  New Question('keren', New Record(1,3*i + 1), New Record(1,3*i + 2), New Record(1,3*i + 3),1),
+    ranQuestions[i] =  New Question('ran', New Record(2,3*i + 1), New Record(2,3*i + 2), New Record(2,3*i + 3),1),
+    yahavQuestions[i] =  New Question('yahav', , New Record(3,3*i + 1), New Record(3,3*i + 2), New Record(3,3*i + 3),1),
+    danielQuestions[i] =  New Question('daniel', , New Record(4,3*i + 1), New Record(4,3*i + 2), New Record(4,3*i + 3),1),
+    asafQuestions[i] =  New Question('asaf', , New Record(5,3*i + 1), New Record(5,3*i + 2), New Record(5,3*i + 3),1),
+    oriQuestions[i] =  New Question('ori', , New Record(6,3*i + 1), New Record(6,3*i + 2), New Record(6,3*i + 3),1),
   }
 }
 

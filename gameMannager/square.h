@@ -7,12 +7,13 @@ class Square
 {
     public:
     int pinID;
-    bool taken;
+    // 0 = not taken ; 1 = player 1 ; 2 = player 2
+    int taken;
     string owendBy;
     Question[] questions;
 
     Square(Question[] questionsForSquares, int pin){
-      taken = false;
+      taken = 0;
       questions = questionsForSquares;
       pinID = pin;
     }
