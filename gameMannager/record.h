@@ -1,4 +1,7 @@
 #include <string>
+#include "FutureYou/gameMannager/question.h"
+#include "FutureYou/gameMannager/square.h"
+#include "FutureYou/gameMannager/player.h"
 
 class AlumniRecords
 {

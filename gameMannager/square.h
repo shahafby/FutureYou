@@ -1,4 +1,6 @@
-#include "alumniRecord.h"
+#include "FutureYou/gameMannager/question.h"
+#include "FutureYou/gameMannager/record.h"
+#include "FutureYou/gameMannager/player.h"
 #include <string>
 
 class Square

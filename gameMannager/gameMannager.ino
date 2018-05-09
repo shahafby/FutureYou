@@ -1,6 +1,8 @@
-#include "alumniRecord.h"
-#include "square.h"
-#include "player.h"
+#include "FutureYou/gameMannager/question.h"
+#include "FutureYou/gameMannager/square.h"
+#include "FutureYou/gameMannager/record.h"
+#include "FutureYou/gameMannager/player.h"
+
 
 #define STATE_START 10
 #define STATE_LOCATION 20
