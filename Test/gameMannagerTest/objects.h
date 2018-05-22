@@ -4,13 +4,15 @@ class Record
   public:
     int file;
     int folder;
-    Record()
-    {
-        file = 0;
-        folder = 0;
-    }
+    Record(){}
     
-    Record(int newFolder , int newFile  )
+    Record(int newFolder , int newFile)
+    {
+        file = newFile;
+        folder = newFolder;
+    }
+
+    init(int newFolder , int newFile)
     {
         file = newFile;
         folder = newFolder;
@@ -21,7 +23,7 @@ class Record
 class Question
 {
   public:
-    Record questionReocrd;
+    Record questionRecord;
     Record optionsRecord;
     Record correctQuestionRecord;
     Record wrongQuestionRecord;
@@ -34,7 +36,17 @@ class Question
     Question(String newAlumni, Record newQuestion, Record newOptionsRecord, Record newCorrectQuestion, Record newWrongQuestion)
     {
         alumni = newAlumni;
-        questionReocrd = newQuestion;
+        questionRecord = newQuestion;
+        optionsRecord = newOptionsRecord;
+        correctQuestionRecord = newCorrectQuestion;
+        wrongQuestionRecord = newWrongQuestion;
+        asked = false;
+    }
+
+    init(String newAlumni, Record newQuestion, Record newOptionsRecord, Record newCorrectQuestion, Record newWrongQuestion)
+    {
+        alumni = newAlumni;
+        questionRecord = newQuestion;
         optionsRecord = newOptionsRecord;
         correctQuestionRecord = newCorrectQuestion;
         wrongQuestionRecord = newWrongQuestion;
@@ -47,9 +59,16 @@ class Alumni
     public:
     Question questions[3];
     String name;
-    Alumni();
+    Alumni(){}
 
     Alumni(String alumniName, Question questionsForAlumni[]){
+      name = alumniName;
+      questions[0] = questionsForAlumni[0];
+      questions[1] = questionsForAlumni[1];
+      questions[2] = questionsForAlumni[2];
+    }
+
+    init(String alumniName, Question questionsForAlumni[]){
       name = alumniName;
       questions[0] = questionsForAlumni[0];
       questions[1] = questionsForAlumni[1];
@@ -70,6 +89,12 @@ class Square
       alumni = newAlumni;
       pinID = pin;
     }
+
+    init(Alumni newAlumni, int pin){
+      taken = 0;
+      alumni = newAlumni;
+      pinID = pin;
+    }
 };
 
 class Player
@@ -81,6 +106,13 @@ class Player
     int numberOfCapturedSquared;
     Player(){}
     Player(int newID, Square newCurrentSquare)
+    {
+        playerID = newID;
+        currentSquare = newCurrentSquare;
+        numberOfCapturedSquared = 0;
+    }
+
+    init(int newID, Square newCurrentSquare)
     {
         playerID = newID;
         currentSquare = newCurrentSquare;
