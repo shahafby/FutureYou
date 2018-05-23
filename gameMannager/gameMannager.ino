@@ -141,7 +141,7 @@ Question getCurrentQuestion(){
 
 int handleStateInput(){
     boolean correctAnswer = true;
-    int answerNumber = checkResponse;
+    int answerNumber = checkResponse();
     
     while(!answerNumber) answerNumber = checkResponse;
 
