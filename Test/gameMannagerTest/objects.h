@@ -1,3 +1,4 @@
+#include "serial_mp3.h"
 
 class Record
 {
@@ -17,6 +18,9 @@ class Record
         file = newFile;
         folder = newFolder;
     }
+    playRecord(){
+      serialmp3_play(Record::folder,Record::file);
+    }
 };
 
 
@@ -29,7 +33,7 @@ class Question
     Record wrongQuestionRecord;
     boolean asked;
      // 0 = wasn't answered ; 1 = player 1 ; 2 = player 2
-    int anwerdBy;
+    int answeredBy;
     String alumni;
 
     Question(){}
@@ -51,6 +55,10 @@ class Question
         correctQuestionRecord = newCorrectQuestion;
         wrongQuestionRecord = newWrongQuestion;
         asked = false;
+    }
+    playQuestion(){
+      Question::questionRecord.playRecord();
+      Question::optionsRecord.playRecord();
     }
 };
 
