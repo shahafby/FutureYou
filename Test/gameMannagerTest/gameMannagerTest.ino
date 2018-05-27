@@ -53,8 +53,8 @@ void setup()
     delay(100);  
     serialmp3_set_vol(22);
     delay(100);
-    Serial.println("before initGame");    
     initGame();
+    Serial.println("after initGame");    
 }
 
 
@@ -76,49 +76,48 @@ void loop()
 }
 
 void initAlumniQuestions(){
-  Serial.println("initAlumniQuestions");    
   for(int i=0; i < 3; i++){
     Record kerenRecs[4];
-    kerenRecs[i].init(1,  i * 4 + 1);
-    kerenRecs[i].init(1,  i * 4 + 2);
-    kerenRecs[i].init(1,  i * 4 + 3);
-    kerenRecs[i].init(1,  i * 4 + 4);
+    kerenRecs[0].init(1,  i * 4 + 1);
+    kerenRecs[1].init(1,  i * 4 + 2);
+    kerenRecs[2].init(1,  i * 4 + 3);
+    kerenRecs[3].init(1,  i * 4 + 4);
     
     Record danielRecs[4];
-    danielRecs[i].init(2,  i * 4 + 1);
-    danielRecs[i].init(2,  i * 4 + 2);
-    danielRecs[i].init(2,  i * 4 + 3);
-    danielRecs[i].init(2,  i * 4 + 4);
+    danielRecs[0].init(2,  i * 4 + 1);
+    danielRecs[1].init(2,  i * 4 + 2);
+    danielRecs[2].init(2,  i * 4 + 3);
+    danielRecs[3].init(2,  i * 4 + 4);
     
     Record uriRecs[4];
-    uriRecs[i].init(3,  i * 4 + 1);
-    uriRecs[i].init(3,  i * 4 + 2);
-    uriRecs[i].init(3,  i * 4 + 3);
-    uriRecs[i].init(3,  i * 4 + 4);
+    uriRecs[0].init(3,  i * 4 + 1);
+    uriRecs[1].init(3,  i * 4 + 2);
+    uriRecs[2].init(3,  i * 4 + 3);
+    uriRecs[3].init(3,  i * 4 + 4);
     
     Record yahavRecs[4];
-    yahavRecs[i].init(4,  i * 4 + 1);
-    yahavRecs[i].init(4,  i * 4 + 2);
-    yahavRecs[i].init(4,  i * 4 + 3);
-    yahavRecs[i].init(4,  i * 4 + 4);
+    yahavRecs[0].init(4,  i * 4 + 1);
+    yahavRecs[1].init(4,  i * 4 + 2);
+    yahavRecs[2].init(4,  i * 4 + 3);
+    yahavRecs[3].init(4,  i * 4 + 4);
     
     Record roniRecs[4];
-    roniRecs[i].init(5,  i * 4 + 1);
-    roniRecs[i].init(5,  i * 4 + 2);
-    roniRecs[i].init(5,  i * 4 + 3);
-    roniRecs[i].init(5,  i * 4 + 4);
+    roniRecs[0].init(5,  i * 4 + 1);
+    roniRecs[1].init(5,  i * 4 + 2);
+    roniRecs[2].init(5,  i * 4 + 3);
+    roniRecs[3].init(5,  i * 4 + 4);
     
     Record asafRecs[4];
-    asafRecs[i].init(6,  i * 4 + 1);
-    asafRecs[i].init(6,  i * 4 + 2);
-    asafRecs[i].init(6,  i * 4 + 3);
-    asafRecs[i].init(6,  i * 4 + 4);
+    asafRecs[0].init(6,  i * 4 + 1);
+    asafRecs[1].init(6,  i * 4 + 2);
+    asafRecs[2].init(6,  i * 4 + 3);
+    asafRecs[3].init(6,  i * 4 + 4);
 
     Record idcRecs[4];
-    idcRecs[i].init(7,  i * 4 + 1);
-    idcRecs[i].init(7,  i * 4 + 2);
-    idcRecs[i].init(7,  i * 4 + 3);
-    idcRecs[i].init(7,  i * 4 + 4);
+    idcRecs[0].init(7,  i * 4 + 1);
+    idcRecs[1].init(7,  i * 4 + 2);
+    idcRecs[2].init(7,  i * 4 + 3);
+    idcRecs[3].init(7,  i * 4 + 4);
 
 
     
@@ -130,11 +129,20 @@ void initAlumniQuestions(){
     asafQuestions[i].init("asaf", asafRecs[0], asafRecs[1], asafRecs[2], asafRecs[3]);
     idcQuestions[i].init("idc", idcRecs[0], idcRecs[1], idcRecs[2], idcRecs[3]);
   } 
-  Serial.println("finish initAlumniQuestions");    
+}
+
+void initAlumni(){
+  Serial.println("ENTERED initAlumni");  
+  alumni[0].init("keren",kerenQuestions);
+  alumni[1].init("daniel",danielQuestions);
+  alumni[2].init("uri",uriQuestions);
+  alumni[3].init("yahav",yahavQuestions);
+  alumni[4].init("roni",roniQuestions);
+  alumni[5].init("asaf",asafQuestions);
+  alumni[6].init("idc",idcQuestions);
 }
 
 void initAllSquares(){
-  Serial.println("initing square");    
   allSquares[0].init(alumni[0], 0);
   allSquares[1].init(alumni[6], 1);
   allSquares[2].init(alumni[1], 2);
@@ -166,20 +174,12 @@ void initAllSquares(){
     
 }
 
-void initAlumni(){
-  alumni[0].init("keren",kerenQuestions);
-  alumni[1].init("daniel",danielQuestions);
-  alumni[2].init("uri",uriQuestions);
-  alumni[3].init("yahav",yahavQuestions);
-  alumni[4].init("roni",roniQuestions);
-  alumni[5].init("asaf",asafQuestions);
-  alumni[6].init("idc",idcQuestions);
-}
-
 void initGame(){
     initAlumniQuestions();
     initAlumni();
+    Serial.println("before init all squares");    
     initAllSquares();
+    Serial.println("after init all squares");    
     
     player1.init(1,allSquares[0]);
     player2.init(2,allSquares[0]);
