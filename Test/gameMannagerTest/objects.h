@@ -77,6 +77,8 @@ class Alumni
     }
 
     init(String alumniName, Question questionsForAlumni[]){
+      Serial.print("initAlumni");
+      Serial.println(alumniName);
       name = alumniName;
       questions[0] = questionsForAlumni[0];
       questions[1] = questionsForAlumni[1];

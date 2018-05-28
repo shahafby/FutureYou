@@ -21,8 +21,8 @@ Question currentQuestion;
 Player player1;
 Player player2;
 
-Square allSquares[2];
-Alumni alumni[1];
+Square allSquares[30];
+Alumni alumni[7];
 
 Record tempRecords[4];
 
@@ -48,12 +48,12 @@ int state = STATE_START;
 void setup()
 {
     Serial.begin(9600);
+    initGame();
     delay(100);  
     serialmp3_init();
     delay(100);  
     serialmp3_set_vol(22);
     delay(100);
-    initGame();
     Serial.println("after initGame");    
 }
 
@@ -61,6 +61,7 @@ void setup()
 
 void loop()
 {
+    Serial.println("loop!!!");
     switch (state){
     case STATE_START:       
         state = handleStateStart();
@@ -77,13 +78,21 @@ void loop()
 
 void initAlumniQuestions(){
   for(int i=0; i < 3; i++){
+    Serial.print("Entered initAlumniQuestions loop ");
+    Serial.println(i);
     Record kerenRecs[4];
     kerenRecs[0].init(1,  i * 4 + 1);
     kerenRecs[1].init(1,  i * 4 + 2);
     kerenRecs[2].init(1,  i * 4 + 3);
     kerenRecs[3].init(1,  i * 4 + 4);
     
-    Record danielRecs[4];
+    Record 
+    uriRecs[3].init(3,  i * 4 + 4);
+    
+    Record yahavRecs[4];
+    yahavRecs[0].init(4,  i * 4 + 1);
+    yahavRecs[1].init(4,  i * 4 + 2);
+    yahavRecs[2].init(4,  i * 4 + 3);danielRecs[4];
     danielRecs[0].init(2,  i * 4 + 1);
     danielRecs[1].init(2,  i * 4 + 2);
     danielRecs[2].init(2,  i * 4 + 3);
@@ -93,12 +102,6 @@ void initAlumniQuestions(){
     uriRecs[0].init(3,  i * 4 + 1);
     uriRecs[1].init(3,  i * 4 + 2);
     uriRecs[2].init(3,  i * 4 + 3);
-    uriRecs[3].init(3,  i * 4 + 4);
-    
-    Record yahavRecs[4];
-    yahavRecs[0].init(4,  i * 4 + 1);
-    yahavRecs[1].init(4,  i * 4 + 2);
-    yahavRecs[2].init(4,  i * 4 + 3);
     yahavRecs[3].init(4,  i * 4 + 4);
     
     Record roniRecs[4];
@@ -122,17 +125,25 @@ void initAlumniQuestions(){
 
     
     kerenQuestions[i].init("keren", kerenRecs[0], kerenRecs[1], kerenRecs[2], kerenRecs[3]);
+//    Serial.print("keren ");Serial.println(i);
     danielQuestions[i].init("daniel", danielRecs[0], danielRecs[1], danielRecs[2], danielRecs[3]);
+//    Serial.print("daniel ");Serial.println(i);
     uriQuestions[i].init("uri", uriRecs[0], uriRecs[1], uriRecs[2], uriRecs[3]);
+//    Serial.print("uri ");Serial.println(i);
     yahavQuestions[i].init("yahav", yahavRecs[0], yahavRecs[1], yahavRecs[2], yahavRecs[3]);
+//    Serial.print("yahav ");Serial.println(i);
     roniQuestions[i].init("roni", roniRecs[0], roniRecs[1], roniRecs[2], roniRecs[3]);
+//    Serial.print("roni ");Serial.println(i);
     asafQuestions[i].init("asaf", asafRecs[0], asafRecs[1], asafRecs[2], asafRecs[3]);
+//    Serial.print("asaf ");Serial.println(i);
     idcQuestions[i].init("idc", idcRecs[0], idcRecs[1], idcRecs[2], idcRecs[3]);
+//    Serial.print("idc ");Serial.println(i);
+    Serial.print("finish init");
+    Serial.println(i);
   } 
 }
 
 void initAlumni(){
-  Serial.println("ENTERED initAlumni");  
   alumni[0].init("keren",kerenQuestions);
   alumni[1].init("daniel",danielQuestions);
   alumni[2].init("uri",uriQuestions);
@@ -140,6 +151,7 @@ void initAlumni(){
   alumni[4].init("roni",roniQuestions);
   alumni[5].init("asaf",asafQuestions);
   alumni[6].init("idc",idcQuestions);
+  
 }
 
 void initAllSquares(){
@@ -176,10 +188,11 @@ void initAllSquares(){
 
 void initGame(){
     initAlumniQuestions();
+    delay(1500);
     initAlumni();
-    Serial.println("before init all squares");    
+    //Serial.println("before init all squares");    
     initAllSquares();
-    Serial.println("after init all squares");    
+    //Serial.println("after init all squares");    
     
     player1.init(1,allSquares[0]);
     player2.init(2,allSquares[0]);
