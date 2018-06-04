@@ -1,6 +1,6 @@
 #include <string.h>
 #include "objects.h"
-//#include "serial_mp3.h"
+#include "serial_mp3.h"
 
 
 #define STATE_START 10
@@ -54,14 +54,12 @@ void setup()
     delay(100);  
     serialmp3_set_vol(22);
     delay(100);
-    Serial.println("after initGame");    
 }
 
 
 
 void loop()
 {
-    Serial.println("loop!!!");
     switch (state){
     case STATE_START:       
         state = handleStateStart();
@@ -78,32 +76,30 @@ void loop()
 
 void initAlumniQuestions(){
   for(int i=0; i < 3; i++){
-    Serial.print("Entered initAlumniQuestions loop ");
-    Serial.println(i);
     Record kerenRecs[4];
     kerenRecs[0].init(1,  i * 4 + 1);
     kerenRecs[1].init(1,  i * 4 + 2);
     kerenRecs[2].init(1,  i * 4 + 3);
     kerenRecs[3].init(1,  i * 4 + 4);
     
-    Record 
+    Record danielRecs[4];
+    danielRecs[0].init(2,  i * 4 + 1);
+    danielRecs[1].init(2,  i * 4 + 2);
+    danielRecs[2].init(2,  i * 4 + 3);
+    danielRecs[3].init(2,  i * 4 + 4); 
+
+    Record uriRecs[4];
+    uriRecs[0].init(3,  i * 4 + 1);
+    uriRecs[1].init(3,  i * 4 + 2);
+    uriRecs[2].init(3,  i * 4 + 3);
     uriRecs[3].init(3,  i * 4 + 4);
     
     Record yahavRecs[4];
     yahavRecs[0].init(4,  i * 4 + 1);
     yahavRecs[1].init(4,  i * 4 + 2);
-    yahavRecs[2].init(4,  i * 4 + 3);danielRecs[4];
-    danielRecs[0].init(2,  i * 4 + 1);
-    danielRecs[1].init(2,  i * 4 + 2);
-    danielRecs[2].init(2,  i * 4 + 3);
-    danielRecs[3].init(2,  i * 4 + 4);
-    
-    Record uriRecs[4];
-    uriRecs[0].init(3,  i * 4 + 1);
-    uriRecs[1].init(3,  i * 4 + 2);
-    uriRecs[2].init(3,  i * 4 + 3);
-    yahavRecs[3].init(4,  i * 4 + 4);
-    
+    yahavRecs[2].init(4,  i * 4 + 3);
+    yahavRecs[3].init(4,  i * 4 + 4);    
+
     Record roniRecs[4];
     roniRecs[0].init(5,  i * 4 + 1);
     roniRecs[1].init(5,  i * 4 + 2);
@@ -125,22 +121,13 @@ void initAlumniQuestions(){
 
     
     kerenQuestions[i].init("keren", kerenRecs[0], kerenRecs[1], kerenRecs[2], kerenRecs[3]);
-//    Serial.print("keren ");Serial.println(i);
     danielQuestions[i].init("daniel", danielRecs[0], danielRecs[1], danielRecs[2], danielRecs[3]);
-//    Serial.print("daniel ");Serial.println(i);
     uriQuestions[i].init("uri", uriRecs[0], uriRecs[1], uriRecs[2], uriRecs[3]);
-//    Serial.print("uri ");Serial.println(i);
     yahavQuestions[i].init("yahav", yahavRecs[0], yahavRecs[1], yahavRecs[2], yahavRecs[3]);
-//    Serial.print("yahav ");Serial.println(i);
     roniQuestions[i].init("roni", roniRecs[0], roniRecs[1], roniRecs[2], roniRecs[3]);
-//    Serial.print("roni ");Serial.println(i);
     asafQuestions[i].init("asaf", asafRecs[0], asafRecs[1], asafRecs[2], asafRecs[3]);
-//    Serial.print("asaf ");Serial.println(i);
     idcQuestions[i].init("idc", idcRecs[0], idcRecs[1], idcRecs[2], idcRecs[3]);
-//    Serial.print("idc ");Serial.println(i);
-    Serial.print("finish init");
-    Serial.println(i);
-  } 
+  }
 }
 
 void initAlumni(){
@@ -156,8 +143,8 @@ void initAlumni(){
 
 void initAllSquares(){
   allSquares[0].init(alumni[0], 0);
-  allSquares[1].init(alumni[6], 1);
-  allSquares[2].init(alumni[1], 2);
+  allSquares[1].init(alumni[1], 1);
+/*  allSquares[2].init(alumni[1], 2);
   allSquares[3].init(alumni[2], 3);
   allSquares[4].init(alumni[6], 4);
   allSquares[5].init(alumni[3], 5);
@@ -183,16 +170,13 @@ void initAllSquares(){
   allSquares[24].init(alumni[5], 24);
   allSquares[25].init(alumni[2], 25);
   allSquares[26].init(alumni[6], 26);
-    
+  */  
 }
 
 void initGame(){
     initAlumniQuestions();
-    delay(1500);
     initAlumni();
-    //Serial.println("before init all squares");    
     initAllSquares();
-    //Serial.println("after init all squares");    
     
     player1.init(1,allSquares[0]);
     player2.init(2,allSquares[0]);
@@ -210,31 +194,32 @@ Player switchPlayer(Player p){
 
 int handleStateStart(){
     currentPlayer = switchPlayer(currentPlayer);
-
     return STATE_LOCATION;
 }
 
 //reutrn the player currentSqaure
 Square getPlayerSqaure(Player p){
     int sensorValue;
-    for( int i = 0; i < sizeof(allSquares) ; i++){
+    for( int i = 0; i < 2 ; i++){
         sensorValue = analogRead(allSquares[i].pinID);
         if(p.playerID == 1 && sensorValue > player1Threshold) return allSquares[i];
         if(p.playerID == 2 && sensorValue < player2Threshold) return allSquares[i];
     }
+    return currentPlayer.currentSquare;
 }
 
 int handleStateLocation(){
-    
-    Serial.print("currentSquare is ");
+    Serial.print("current square ");
     Serial.println(currentPlayer.currentSquare.pinID);
-    while(currentPlayer.currentSquare.pinID == getPlayerSqaure(currentPlayer).pinID){
+    Square newSquare = getPlayerSqaure(currentPlayer);
+    while(currentPlayer.currentSquare.pinID == newSquare.pinID){
+        newSquare = getPlayerSqaure(currentPlayer);
         delay(10);
     }
-    currentPlayer.currentSquare = getPlayerSqaure(currentPlayer);
-    currentSquare = currentPlayer.currentSquare;
-    Serial.print("currentSquare is ");
+    currentPlayer.currentSquare.init(newSquare.alumni,newSquare.pinID);
+    Serial.print("current square ");
     Serial.println(currentPlayer.currentSquare.pinID);
+    currentSquare = currentPlayer.currentSquare;
     return STATE_QUESTION;
 //    return STATE_LOCATION;
 }
@@ -258,26 +243,36 @@ void setCurrentQuestion(){
     Alumni currentAlumni = currentSquare.alumni;
     for(int i = 0;i < 3; i++){
       currentQuestion = currentAlumni.questions[i];
-      if(!currentQuestion.asked) return;
-//      currentQuestion.init(currentAlumni.name
-//      ,currentAlumni.questions[i].questionRecord
-//      ,currentAlumni.questions[i].optionsRecord
-//      ,currentAlumni.questions[i].correctQuestionRecord
-//      ,currentAlumni.questions[i].wrongQuestionRecord);
-//      //stop at the first unasked question
-//      if(!currentQuestion.asked)return;   
+      if(!currentQuestion.asked){
+        Serial.println("found question");
+        return;
+      }
     }
 }
 
 int handleStateQuestion(){
-    setCurrentQuestion();
-    Serial.print("current question is ");
-    Serial.println(currentQuestion.alumni);
+    Serial.println("handleStateQuestion");
     
+    setCurrentQuestion();
+    Serial.print("questionRecord folder : ");
+    Serial.print(currentQuestion.questionRecord.folder);
+    Serial.print(" file : ");
+    Serial.println(currentQuestion.questionRecord.file);
+    serialmp3_play(currentQuestion.questionRecord.folder,currentQuestion.questionRecord.file);
+    while(serialmp3_checkStatus() != 30) {
+      //Serial.print(" getIsPlaying() : ");
+      //Serial.println(getIsPlaying());
+    }
+    delay(2);
+    Serial.print("optionsRecord folder : ");
+    Serial.print(currentQuestion.optionsRecord.folder);
+    Serial.print(" file : ");
+    Serial.println(currentQuestion.optionsRecord.file);
+    serialmp3_play(currentQuestion.optionsRecord.folder,currentQuestion.optionsRecord.file);
+    delay(50);
 
-  //    serialmp3_play(currentQuestion.questionRecord.folder,currentQuestion.questionRecord.file);
-    currentQuestion.playQuestion();
-    currentQuestion.asked = true;
+    //currentQuestion.playQuestion();
+    //currentQuestion.asked = true;
     return STATE_INPUT;
 }
 

@@ -60,6 +60,7 @@ static int8_t serialmp3_sendbuf[8] = { 0 };
 static uint8_t serialmp3_ansbuf[10] = {0};
 // flag for playing
 boolean serialmp3_isPlaying = false;
+boolean isPlaying = false;
 
 
 void serialmp3_sendCommand(int8_t command, int16_t dat) {
@@ -166,6 +167,7 @@ void serialmp3_play(byte track) {
 
 void serialmp3_play(byte folder, byte track) {
   serialmp3_play(folder, track, false);
+  
 }
 
 void serialmp3_stop() {
@@ -186,6 +188,18 @@ void serialmp3_next() {
 
 void serialmp3_prev() {
   serialmp3_sendCommand(CMD_PREV_SONG, 0);
+}
+
+void nowPlaying(){
+  isPlaying = true;
+}
+
+void finishedPlaying(){
+  isPlaying = flase;
+}
+
+boolean getIsPlaying(){
+  return isPlaying;
 }
 
 

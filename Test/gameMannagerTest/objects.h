@@ -1,4 +1,3 @@
-#include "serial_mp3.h"
 
 class Record
 {
@@ -18,9 +17,10 @@ class Record
         file = newFile;
         folder = newFolder;
     }
-    playRecord(){
+    /*playRecord(){
+      Serial.println("enter play record");
       serialmp3_play(Record::folder,Record::file);
-    }
+    }*/
 };
 
 
@@ -56,10 +56,11 @@ class Question
         wrongQuestionRecord = newWrongQuestion;
         asked = false;
     }
-    playQuestion(){
+    /*playQuestion(){
+      Serial.println("enter play Question");
       Question::questionRecord.playRecord();
       Question::optionsRecord.playRecord();
-    }
+    }*/
 };
 
 class Alumni
@@ -77,8 +78,6 @@ class Alumni
     }
 
     init(String alumniName, Question questionsForAlumni[]){
-      Serial.print("initAlumni");
-      Serial.println(alumniName);
       name = alumniName;
       questions[0] = questionsForAlumni[0];
       questions[1] = questionsForAlumni[1];
