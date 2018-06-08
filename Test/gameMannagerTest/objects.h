@@ -4,18 +4,21 @@ class Record
   public:
     int file;
     int folder;
+    int recLength;
     Record(){}
     
-    Record(int newFolder , int newFile)
+    Record(int newFolder , int newFile, int newRecLength)
     {
         file = newFile;
         folder = newFolder;
+        recLength = newRecLength;
     }
 
-    init(int newFolder , int newFile)
+    init(int newFolder , int newFile, int newRecLength)
     {
         file = newFile;
         folder = newFolder;
+        recLength = newRecLength;
     }
     /*playRecord(){
       Serial.println("enter play record");
@@ -35,32 +38,30 @@ class Question
      // 0 = wasn't answered ; 1 = player 1 ; 2 = player 2
     int answeredBy;
     String alumni;
+    int correctAnswerNumber;
 
     Question(){}
-    Question(String newAlumni, Record newQuestion, Record newOptionsRecord, Record newCorrectQuestion, Record newWrongQuestion)
+    Question(String newAlumni, Record newQuestion, Record newOptionsRecord, Record newCorrectQuestion, Record newWrongQuestion, int newCorrectAnswerNumber)
     {
         alumni = newAlumni;
         questionRecord = newQuestion;
         optionsRecord = newOptionsRecord;
         correctQuestionRecord = newCorrectQuestion;
         wrongQuestionRecord = newWrongQuestion;
+        correctAnswerNumber = newCorrectAnswerNumber;
         asked = false;
     }
 
-    init(String newAlumni, Record newQuestion, Record newOptionsRecord, Record newCorrectQuestion, Record newWrongQuestion)
+    init(String newAlumni, Record newQuestion, Record newOptionsRecord, Record newCorrectQuestion, Record newWrongQuestion, int newCorrectAnswerNumber)
     {
         alumni = newAlumni;
         questionRecord = newQuestion;
         optionsRecord = newOptionsRecord;
         correctQuestionRecord = newCorrectQuestion;
         wrongQuestionRecord = newWrongQuestion;
+        correctAnswerNumber = newCorrectAnswerNumber;
         asked = false;
     }
-    /*playQuestion(){
-      Serial.println("enter play Question");
-      Question::questionRecord.playRecord();
-      Question::optionsRecord.playRecord();
-    }*/
 };
 
 class Alumni
